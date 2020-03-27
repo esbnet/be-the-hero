@@ -1,35 +1,20 @@
-const express = require('express');
-
-const OngController = require('./controllers/OngController');
-const IncidentsController = require('./controllers/InsidentController');
-const ProfileController = require('./controllers/ProfileController');
-const SessionController = require('./controllers/SessionController');
+const express = require("express");
+const OngController = require("./controllers/OngController");
+const IncidentController = require("./controllers/IncidentController");
+const ProfileController = require("./controllers/ProfileController");
+const SessionController = require("./controllers/SessionController");
 
 const routes = express.Router();
 
-routes.post('/sessions', SessionController.create);
+routes.get("/ongs", OngController.index);
+routes.post("/ongs", OngController.store);
 
-/** 
- * Ongs 
- * */
+routes.post("/sessions", SessionController.store);
 
+routes.get("/profile", ProfileController.index);
 
- // Cadastra Ong passada via Json
-routes.post('/ongs', OngController.create);
-// Listagem de ongs
-routes.get('/ongs', OngController.index); 
-
-routes.get('/profile', ProfileController.index); 
-
-/** 
- * Casos 
- * */
- 
-// Cadastra Caso passado via Json
-routes.post('/incidents', IncidentsController.create);
-// Listagem de Casos
-routes.get('/incidents', IncidentsController.index); 
-// Deletar um Caso
-routes.delete('/incidents/:id', IncidentsController.delete); 
+routes.get("/incidents", IncidentController.index);
+routes.post("/incidents", IncidentController.store);
+routes.delete("/incidents/:id", IncidentController.delete);
 
 module.exports = routes;
